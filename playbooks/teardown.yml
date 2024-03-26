@@ -1,0 +1,14 @@
+# Copyright 2024 Cisco Systems, Inc. and its affiliates
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+
+# Teardown Cisco SD-WAN version 20.13 on AWS
+
+- name: Deploy Cisco SD-WAN versions 20.13 on AWS
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    ./sdwan_config.yml
+  tasks:
+  roles:
+    - cisco.sdwan_deployment.aws_teardown

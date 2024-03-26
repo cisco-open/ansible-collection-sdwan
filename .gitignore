@@ -1,0 +1,10 @@
+.vscode
+ansible.log
+poetry.lock
+run
+playbooks/shared/
+playbooks/results/
+playbooks/ansible_catalystwan.log
+playbooks/ansible_catalystwan_module.log
+playbooks/catalystwan.log
+playbooks/sdwan_config_dev.yml

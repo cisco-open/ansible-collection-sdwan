@@ -1,0 +1,9 @@
+collections:
+- name: amazon.aws
+  version: 6.5.0
+- name: git@github.com:cisco-open/ansible-collection-catalystwan.git
+  type: git
+  version: main
+- name: git@github.com:cisco-open/ansible-collection-sdwan-deployment.git
+  type: git
+  version: main

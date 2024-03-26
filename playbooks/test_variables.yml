@@ -1,0 +1,42 @@
+# Copyright 2024 Cisco Systems, Inc. and its affiliates
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+
+# Note: These task verify variables for roles - but many of them already use some default values
+# so users don't have to configure too many fields.
+
+- name: Test provided configuration data. No cloud auth checks. No system changes.
+  hosts: localhost
+  vars_files:
+    - ./sdwan_config.yml
+  vars:
+    required_variables:
+      organization_name: "{{ organization_name | default() }}"
+      aws_region: "{{ aws_region | default() }}"
+      aws_availibility_zone: "{{ aws_availibility_zone | default() }}"
+      pnp_username: "{{ pnp_username | default() }}"
+      pnp_password: "{{ pnp_password | default() }}"
+      aws_allowed_subnets: "{{ aws_allowed_subnets | default() }}"
+      aws_vmanage_ami_id: "{{ aws_vmanage_ami_id | default() }}"
+      aws_vbond_ami_id: "{{ aws_vbond_ami_id | default() }}"
+      aws_vsmart_ami_id: "{{ aws_vsmart_ami_id | default() }}"
+      aws_cedge_ami_id: "{{ aws_cedge_ami_id | default() }}"
+  tasks:
+    - name: Assert that required variables are provided
+      ansible.builtin.assert:
+        that:
+          - variable.value
+          - variable.value is defined
+          - variable.value is not none
+          - variable.value != None
+          - variable.value != "None"
+          - variable.value != ""
+          - variable.value | length > 0
+        fail_msg: "Verification for variables failed: missing required variable: {{ variable.key }}"
+        success_msg: "Required variable: {{ variable.key }} provided"
+        quiet: true
+      loop: "{{ required_variables | dict2items }}"
+      loop_control:
+        loop_var: variable
+        label: "{{ variable.key }}"
+      when: required_variables is defined

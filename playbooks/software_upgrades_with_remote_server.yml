@@ -1,0 +1,24 @@
+# Copyright 2024 Cisco Systems, Inc. and its affiliates
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+
+- name: Software upgrades with Remote Server
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - ./sdwan_config.yml
+    - "{{ results_path_controllers }}"
+  vars:
+    remote_server_name: null
+    remote_server_url: null
+    remote_server_user: null
+    remote_server_password: null
+    remote_server_image_location_prefix: null
+    vmanage_remote_software_filename: null
+    viptela_remote_software_filename: null 
+    cedge_remote_software_filename: null
+    controller_software_version_to_activate: null  # For Remote Images that don't report its version in repository, we have to provide that value directly
+    edge_software_version_to_activate: null  # For Remote Images that don't report its version in repository, we have to provide that value directly
+    remove_available_software_from_device: true
+  roles:
+    - cisco.catalystwan.software_upgrades_remote

@@ -1,0 +1,21 @@
+# Copyright 2024 Cisco Systems, Inc. and its affiliates
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+
+- name: Test environment against example tasks. No cloud auth checks. No system changes.
+  hosts: localhost
+  tasks:
+    - name: Verify 'boto3' and 'cisco.sdwan_deployment' collection usage
+      ansible.builtin.include_role:
+        name: cisco.sdwan_deployment.common
+        tasks_from: aws_boto3_requirements.yml
+
+    - name: Verify 'catalystwan' and 'cisco.catalystwan' collection usage
+      cisco.catalystwan.wait_for_api_server:
+        timeout_seconds: 1
+        sleep_seconds: 1
+        manager_authentication:
+          url: "dummy"
+          username: "dummy"
+          password: "dummy"
+      check_mode: true

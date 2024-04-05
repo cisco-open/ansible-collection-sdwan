@@ -1,0 +1,87 @@
+Content-Type: multipart/mixed; boundary="===============8815267485200512281=="
+MIME-Version: 1.0
+
+--===============8815267485200512281==
+Content-Type: text/cloud-config; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="cloud-config"
+
+
+#cloud-config
+
+chpasswd:
+  expire: false
+  list:
+  - root:root
+  - admin:Cisco#123@Viptela
+write_files:
+- path: /etc/default/personality
+  content: "vsmart\n"
+- path: /etc/default/inited
+  content: "1\n"
+- path: /etc/confd/init/zcloud.xml
+  content: |
+    <config xmlns="http://tail-f.com/ns/config/1.0">
+      <system xmlns="http://viptela.com/system">
+        <host-name>acich-az-vSmart</host-name>
+        <personality>vsmart</personality>
+        <device-model>vsmart</device-model>
+        <system-ip>192.168.2.1</system-ip>
+        <organization-name>acich-az</organization-name>
+        <sp-organization-name>acich-az</sp-organization-name>
+        <site-id>300</site-id>
+        <vbond>
+          <remote>172.191.188.21</remote>
+        </vbond>
+        <aaa>
+          <user>
+            <name>admin</name>
+            <password>Cisco#123@Viptela</password>
+          </user>
+        </aaa>
+      </system>
+      <vpn xmlns="http://viptela.com/vpn">
+        <vpn-instance>
+          <vpn-id>0</vpn-id>
+            <interface>
+              <if-name>eth1</if-name>
+              <ip>
+                <dhcp-client>true</dhcp-client>
+              </ip>
+              <tunnel-interface>
+                <encapsulation>
+                  <encap>ipsec</encap>
+                </encapsulation>
+                <color>
+                  <value>default</value>
+                </color>
+                <allow-service>
+                  <sshd>true</sshd>
+                  <netconf>true</netconf>
+                </allow-service>
+              </tunnel-interface>
+              <shutdown>false</shutdown>
+            </interface>
+          <ip>
+            <route>
+              <prefix>0.0.0.0/0</prefix>
+              <next-hop>
+                <address>10.0.2.1</address>
+              </next-hop>
+            </route>
+          </ip>
+        </vpn-instance>
+        <vpn-instance>
+          <vpn-id>512</vpn-id>
+          <interface>
+            <if-name>eth0</if-name>
+            <ip>
+              <dhcp-client>true</dhcp-client>
+            </ip>
+            <shutdown>false</shutdown>
+          </interface>
+        </vpn-instance>
+      </vpn>
+    </config>
+--===============8815267485200512281==

@@ -1,0 +1,98 @@
+# Copyright 2024 Cisco Systems, Inc. and its affiliates
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+
+# Minimal configuration file to deploy vManage, vBond, vSmart and cEdge instances
+
+#######################################
+#     Required configuration data     #
+#######################################
+
+organization_name: null
+pnp_username: null
+pnp_password: null
+
+
+#######################################
+#     General Azure configuration     #
+#######################################
+
+az_location: eastus
+az_resources_prefix: "{{ organization_name }}"
+
+
+# az_allowed_subnets: is list of subnets, that are allowed to access your instances
+#
+# example configuration is:
+# az_allowed_subnets:
+#   - 15.15.0.0/16
+#   - 10.10.0.0/16
+aws_allowed_subnets: null
+
+
+###############################
+#          Controllers        #
+###############################
+
+# vManage
+az_vmanage_image_vhd_source: null
+az_vmanage_vm_size: "Standard_F16s_v2"
+
+site_id_vmanage: 100
+
+vmanage_instances:
+  - hostname: "{{ az_resources_prefix }}-vManage"
+    system_ip: 192.168.1.1
+    site_id: "{{ site_id_vmanage }}"
+
+
+# vBond
+az_vbond_image_vhd_source: null
+az_vbond_vm_size: "Standard_F4s_v2"
+site_id_vbond: 200
+
+vbond_instances:
+  - hostname: "{{ az_resources_prefix }}-vBond"
+    system_ip: 192.168.3.1
+    site_id: "{{ site_id_vbond }}"
+
+
+# vSmart
+az_vsmart_image_vhd_source: null
+az_vsmart_vm_size: "Standard_F4s_v2"
+
+site_id_vsmart: 300
+
+vsmart_instances:
+  - hostname: "{{ az_resources_prefix }}-vSmart"
+    system_ip: 192.168.2.1
+    site_id: "{{ site_id_vsmart }}"
+
+
+################################
+#          Edge devices        #
+################################
+
+# cedge C8000K
+az_cedge_vm_size: "Standard_D2_v2"
+
+az_cedge_image_offer: "cisco-c8000v-byol"
+az_cedge_image_publisher: "cisco"
+az_cedge_image_sku: "17_13_01a-byol"
+az_cedge_image_version: "17.13.0120231222"
+
+# If no edge instances configured, they will be automatically created
+# based on the PnP Portal information.
+# See `deployment_edges_config` to inspect result
+
+
+##########################################
+#       Reusable deployment facts        #
+##########################################
+
+results_dir: "{{ playbook_dir }}/results"
+results_path_controllers: "{{ results_dir }}/controllers.yml"
+results_path_edges: "{{ results_dir }}/edges.yml"
+
+# Required by role: cisco.catalystwan.sync_pnp_edges
+deployment_edges_config: "{{ results_dir }}/edges_from_pnp_bootstrap.yml"

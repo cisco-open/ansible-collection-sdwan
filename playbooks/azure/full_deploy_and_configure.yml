@@ -2,23 +2,23 @@
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 
-# Deploy Cisco SD-WAN version 20.13 on AWS
-- name: Deploy Cisco SD-WAN versions 20.13 on AWS
+# Deploy Cisco SD-WAN version 20.13 on Azure
+- name: Deploy Cisco SD-WAN versions 20.13 on Azure
   hosts: localhost
   gather_facts: false
   vars_files:
-    ./sdwan_config.yml
+    ./azure_sdwan_config.yml
   tasks:
   roles:
-    - cisco.sdwan_deployment.aws_network_infrastructure
-    - cisco.sdwan_deployment.aws_controllers
+    - cisco.sdwan_deployment.azure_network_infrastructure
+    - cisco.sdwan_deployment.azure_controllers
 
 
 - name: Verify server connectivity, set initial configuration, onboard controllers
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./sdwan_config.yml
+    - ./azure_sdwan_config.yml
     - "{{ results_path_controllers }}"
   roles:
     - cisco.catalystwan.api_ready
@@ -30,7 +30,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./sdwan_config.yml
+    - ./azure_sdwan_config.yml
     - "{{ results_path_controllers }}"
   roles:
     - cisco.catalystwan.sync_pnp_edges
@@ -41,11 +41,12 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./sdwan_config.yml
+    - ./azure_sdwan_config.yml
     - "{{ results_path_controllers }}"
     - "{{ deployment_edges_config }}"
   roles:
-    - cisco.sdwan_deployment.aws_edges
+    - cisco.sdwan_deployment.azure_edges
+
 
 
 # Onboard edge devices and wait for their reachability
@@ -53,7 +54,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./sdwan_config.yml
+    - ./azure_sdwan_config.yml
     - "{{ results_path_controllers }}"
     - "{{ results_path_edges }}"
   roles:
@@ -65,7 +66,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./sdwan_config.yml
+    - ./azure_sdwan_config.yml
     - "{{ results_path_controllers }}"
     - "{{ results_path_edges }}"
   vars:
@@ -81,7 +82,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./sdwan_config.yml
+    - ./azure_sdwan_config.yml
     - "{{ results_path_controllers }}"
     - "{{ results_path_edges }}"
   roles:

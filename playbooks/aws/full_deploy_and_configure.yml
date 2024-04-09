@@ -19,6 +19,7 @@
   gather_facts: false
   vars_files:
     - ./aws_sdwan_config.yml
+    - ./pnp_credentials.yml
     - "{{ results_path_controllers }}"
   roles:
     - cisco.catalystwan.api_ready
@@ -31,6 +32,7 @@
   gather_facts: false
   vars_files:
     - ./aws_sdwan_config.yml
+    - ./pnp_credentials.yml
     - "{{ results_path_controllers }}"
   roles:
     - cisco.catalystwan.sync_pnp_edges

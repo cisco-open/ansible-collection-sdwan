@@ -13,13 +13,15 @@
   vars:
     required_variables:
       organization_name: "{{ organization_name | default() }}"
-      aws_region: "{{ aws_region | default() }}"
-      aws_availibility_zone: "{{ aws_availibility_zone | default() }}"
-      aws_allowed_subnets: "{{ aws_allowed_subnets | default() }}"
-      aws_vmanage_ami_id: "{{ aws_vmanage_ami_id | default() }}"
-      aws_vbond_ami_id: "{{ aws_vbond_ami_id | default() }}"
-      aws_vsmart_ami_id: "{{ aws_vsmart_ami_id | default() }}"
-      aws_cedge_ami_id: "{{ aws_cedge_ami_id | default() }}"
+      az_location: "{{ az_location | default() }}"
+      az_allowed_subnets: "{{ az_allowed_subnets | default() }}"
+      az_vmanage_image_vhd_source: "{{ az_vmanage_image_vhd_source | default() }}"
+      az_vbond_vm_size: "{{ az_vbond_vm_size | default() }}"
+      az_vsmart_image_vhd_source: "{{ az_vsmart_image_vhd_source | default() }}"
+      az_cedge_image_offer: "{{ az_cedge_image_offer | default() }}"
+      az_cedge_image_publisher: "{{ az_cedge_image_publisher | default() }}"
+      az_cedge_image_sku: "{{ az_cedge_image_sku | default() }}"
+      az_cedge_image_version: "{{ az_cedge_image_version | default() }}"
   tasks:
     - name: Assert that required variables are provided
       ansible.builtin.assert:

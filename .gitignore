@@ -12,7 +12,6 @@ playbooks/azure/ansible_catalystwan.log
 playbooks/ansible_catalystwan_module.log
 playbooks/azure/ansible_catalystwan_module.log
 playbooks/aws/ansible_catalystwan_module.log
-playbooks/aws/vault-password.txt
-playbooks/azure/vault-password.txt
+vault-password.txt
 playbooks/catalystwan.log
 playbooks/sdwan_config_dev.yml

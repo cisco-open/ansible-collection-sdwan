@@ -46,7 +46,8 @@ By leveraging these Ansible resources, [ansible-collection-sdwan](https://github
 
 ## Prerequisites
 
-This project utilizes a tech stack that includes Python, Ansible (and Ansible Galaxy), Boto/Boto3, authentication with AWS CLI, and finally Cisco SD-WAN.
+This project utilizes a tech stack that includes Python, Ansible (and Ansible Galaxy), AWS cloud (Boto/Boto3, authentication with AWS CLI)
+Azure cloud (ansible azure collection) and finally Cisco SD-WAN.
 Below you will find the necessary information to set up your environment.
 
 Before you begin, ensure that you have administrative access to your machine to install the required software.
@@ -63,19 +64,23 @@ This project is cross-platform and can be set up on the following operating syst
 
 ### Python requirement
 
-Supported version: Python >=3.8+
+Supported version: Python >=3.10+
 
-- Due to the [AWS SDK Python Support Policy](https://aws.amazon.com/blogs/developer/python-support-policy-updates-for-aws-sdks-and-tools/) this collection requires Python 3.8 or greater.
-
-- Due to the requirement of [catalystwan](https://github.com/CiscoDevNet/catalystwan), this collection requires Python 3.8 or greater.
+- Due to [ansible-core==2.16](https://docs.ansible.com/ansible/latest/reference_appendices/release_and_maintenance.html#ansible-core-support-matrix) requirement, this collection requires Python 3.10 or greater.
 
 ### Cloud authentication requirement
 
-Verify that you have access to create resources with provider - AWS.
+Verify that you have access to create resources with your provider:
+
+#### AWS
 
 - See [AWS Ansible Authentication docs](https://docs.ansible.com/ansible/latest/collections/amazon/aws/docsite/guide_aws.html#authentication) to learn more.
 
 - See [AWS CLI configuration](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) to learn more.
+
+#### Azure
+
+- See [Authenticating with Azure](https://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html#authenticating-with-azure)
 
 ### PnP Portal requirement
 
@@ -87,7 +92,7 @@ Current version of the full workflow for bringup SD-WAN assumes that users are f
 
 ## Installation
 
-With supported version of Python installed, you can first set up your environment with:
+With supported version of Python (>=3.10) installed, you can first set up your environment with:
 
 ```bash
 python3 -m venv <your-venv-name>
@@ -103,8 +108,16 @@ ansible-galaxy install -r requirements.yml
 
 Verify that your ansible version is using python modules from vevn by using test playbook:
 
+For AWS:
+
 ```bash
-ansible-playbook playbooks/test_env.yml
+ansible-playbook playbooks/aws/test_env.yml
+```
+
+For Azure:
+
+```bash
+ansible-playbook playbooks/azure/test_env.yml
 ```
 
 If playbook finished without any failed tasks, environment is ready for next tasks.
@@ -113,12 +126,52 @@ If requirements have been installed and tasks returned information about missing
 
 ## Usage
 
+### Ansible Vault prerequisite
+
+In this section, suggested usage of Ansible Vault with Vault password stored in files is presented.
+While not mandatory, it is recommended to utilize Ansible Vault for securing sensitive data such as credentials and secret keys.
+Ansible Vault provides encryption capabilities that help in maintaining the security of your secrets within your playbooks.
+However, the management of secrets is ultimately at your discretion, and you may employ any other method that aligns with your security policies and operational practices.
+Feel free to use any other manager to encrypt `pnp_username` and `pnp_password` variables.
+
+#### Using Ansible Vault to securely provide PnP Portal credentials
+
+First, create file with ansible-valut password that will be used to secure your vault.
+Example file: `vault-password.txt`, created with content:
+
+```txt
+mysafepassword
+```
+
+Then, supply values for pnp credentials in pnp_credentials.yml file. For azure you can use `playbooks/azure/pnp_credentials.yml`
+and for aws `playbooks/aws/pnp_credentials.yml`.
+
+Encrypt the pnp credentials file with your valut password by running:
+
+```bash
+ansible-vault encrypt --vault-password-file=vault-password.txt playbooks/azure/pnp_credentials.yml 
+```
+
+From now, `playbooks/azure/pnp_credentials.yml` or `playbooks/aws/pnp_credentials.yml` file will be encrypted.
+
+In order to run playbook that requires pnp_credentials, users have to specify path for ansible vault password file.
+Example:
+
+```bash
+ansible-playbook playbooks/azure/test_vault_usage.yml --vault-password-file=vault-password.txt
+```
+
 ### Configuration file
 
 Full deployment and onboarding comes with predefined configuration file, that will bringup 3 controllers and all edge devices
 configured in PnP portal. It's user responsibility to ensure that PnP Portal configuration is correct and fautless.
 
-Configuration file is located in `playbooks/sdwan_config.yml`. Please complete all fields marked as `null`.
+Configuration file is located in:
+
+- for Azure: `playbooks/azure/sdwan_config.yml`
+- for AWS: `playbooks/aws/sdwan_config.yml`.
+
+Please complete all fields marked as `null`.
 
 Please see [Prerequisites for Deploying Cisco SD-WAN Controllers in AWS
 ](https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/sdwan-xe-gs-book/controller-aws.html#Cisco_Concept.dita_f1fa60cb-2f60-4350-ae74-1090073ca4be) and
@@ -126,16 +179,28 @@ Please see [Prerequisites for Deploying Cisco SD-WAN Controllers in AWS
 
 Additional step: verify that your configuration file include all required variables, by running this pre-check playbook:
 
+AWS:
+
 ```bash
-ansible-playbook playbooks/test_variables.yml
+ansible-playbook playbooks/aws/test_variables.yml --vault-password-file=vault-password.txt
+```
+
+Azure:
+
+```bash
+ansible-playbook playbooks/aws/test_variables.yml --vault-password-file=vault-password.txt
 ```
 
 ### Final run
 
-Finally, run full playbook:
+Finally, run full playbook, depending on your cloud provider:
 
 ```bash
-ansible-playbook playbooks/full_deploy_and_configure.yml
+ansible-playbook playbooks/azure/full_deploy_and_configure.yml --vault-password-file=vault-password.txt
+```
+
+```bash
+ansible-playbook playbooks/aws/full_deploy_and_configure.yml --vault-password-file=vault-password.txt
 ```
 
 ---
@@ -156,7 +221,7 @@ Check that the 'ansible python module location' points to your virtual environme
 
 ### 2. Correct Ansible Version Pointing to the Wrong Virtual Environment
 
-If Ansible is pointing to the wrong virtual environment, modify the `playbooks/sdwan_config.yml` configuration file. Add this line:
+If Ansible is pointing to the wrong virtual environment, modify the `sdwan_config.yml` configuration file. Add this line:
 
 ```yml
 ansible_python_interpreter: "/<path-to-your-venv>/bin/python"
@@ -208,6 +273,10 @@ Ansible Galaxy provides pre-packaged units of work known as roles, and it can be
 
 - [Using Ansible Galaxy](https://galaxy.ansible.com/docs/)
 
+### Ansible Vault
+
+- [Protecting sensitive data with Ansible vault](https://docs.ansible.com/ansible/latest/vault_guide/index.html)
+
 ### AWS CLI
 
 - [Installing AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
@@ -217,6 +286,10 @@ Ansible Galaxy provides pre-packaged units of work known as roles, and it can be
 
 - [Understanding and Getting Your Security Credentials](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html)
 - [Configuring AWS Credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
+
+### Azure Authentication
+
+- [Authenticating with Azure](https://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html#authenticating-with-azure)
 
 ### Cisco SD-WAN
 

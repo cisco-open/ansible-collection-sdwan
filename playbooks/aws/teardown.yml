@@ -2,7 +2,7 @@
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 
-# Teardown Cisco SD-WAN version 20.13 on AWS
+# Teardown Cisco SD-WAN on AWS
 - name: Teardown Cisco SD-WAN versions from AWS
   hosts: localhost
   gather_facts: false

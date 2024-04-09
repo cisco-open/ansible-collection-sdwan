@@ -17,7 +17,7 @@ pnp_password: null
 #     General Azure configuration     #
 #######################################
 
-az_location: eastus
+az_location: eastus # e.g. eastus
 az_resources_prefix: "{{ organization_name }}"
 
 

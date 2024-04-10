@@ -102,9 +102,11 @@ source <your-venv-name>/bin/activate
 And then install python and ansible requirements:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt --no-deps
 ansible-galaxy install -r requirements.yml
 ```
+
+Note: For python packages installation troubleshooting see [python-packages-installation](#5-python-packages-installation)
 
 Verify that your ansible version is using python modules from vevn by using test playbook:
 
@@ -240,6 +242,19 @@ ansible-galaxy collection install -r requirements.yml --upgrade
 ### 4. Double-Check Ansible Collection Installation Location
 
 Ansible defaults to installing the collection in `~/.ansible/collections`. This can cause problems if you're using the wrong collection version. Ensure your collection version is correct if you run into issues.
+
+### 5. Python packages installation
+
+Python packages requirements are formed to include all dependencies.
+Therefore if you face issues with installation, note that there is known confict:
+
+```log
+    The user requested packaging
+    catalystwan 0.31.2 depends on packaging<24.0 and >=23.0
+    azure-cli-core 2.34.0 depends on packaging<22.0 and >=20.9
+```
+
+solved by using: `pip install -r requirements.txt --no-deps` command.
 
 ---
 

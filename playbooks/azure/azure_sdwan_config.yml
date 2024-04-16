@@ -9,62 +9,60 @@
 #######################################
 
 organization_name: null
-pnp_username: null
-pnp_password: null
 
 
-#####################################
-#     General AWS configuration     #
-#####################################
+#######################################
+#     General Azure configuration     #
+#######################################
 
-aws_region: us-east-1
-aws_availibility_zone: us-east-1a
-aws_resources_prefix: "{{ organization_name }}"
+az_location: eastus # e.g. eastus
+az_resources_prefix: "{{ organization_name }}"
 
-# aws_allowed_subnets is list of subnets, that are allowed to access your instances via security group in AWS
-# See https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html to learn more
+
+# az_allowed_subnets: is list of subnets, that are allowed to access your instances
 #
 # example configuration is:
-# aws_allowed_subnets:
+# az_allowed_subnets:
 #   - 15.15.0.0/16
 #   - 10.10.0.0/16
-aws_allowed_subnets: null
-
 
 ###############################
 #          Controllers        #
 ###############################
 
 # vManage
-aws_vmanage_ami_id: null
-aws_vmanage_instance_type: "c5.9xlarge"
+az_vmanage_image_vhd_source: null
+az_vmanage_vm_size: "Standard_F16s_v2"
+
+site_id_vmanage: 100
 
 vmanage_instances:
-  - hostname: "{{ aws_resources_prefix }}-vManage"
+  - hostname: "{{ az_resources_prefix }}-vManage"
     system_ip: 192.168.1.1
-    site_id: 111
+    site_id: "{{ site_id_vmanage }}"
 
 
 # vBond
-aws_vbond_ami_id: null
-aws_vbond_instance_type: "c5.large"
+az_vbond_image_vhd_source: null
+az_vbond_vm_size: "Standard_F4s_v2"
+site_id_vbond: 200
 
 vbond_instances:
-  - hostname: "{{ aws_resources_prefix }}-vBond"
+  - hostname: "{{ az_resources_prefix }}-vBond"
     system_ip: 192.168.3.1
-    site_id: 222
+    site_id: "{{ site_id_vbond }}"
 
 
 # vSmart
-aws_vsmart_ami_id: null
-aws_vsmart_instance_type: "c5.large"
+az_vsmart_image_vhd_source: null
+az_vsmart_vm_size: "Standard_F4s_v2"
+
+site_id_vsmart: 300
 
 vsmart_instances:
-  - hostname: "{{ aws_resources_prefix }}-vSmart"
+  - hostname: "{{ az_resources_prefix }}-vSmart"
     system_ip: 192.168.2.1
-    site_id: 333
-
-
+    site_id: "{{ site_id_vsmart }}"
 
 
 ################################
@@ -72,8 +70,12 @@ vsmart_instances:
 ################################
 
 # cedge C8000K
-aws_cedge_ami_id: null
-aws_cedge_instance_type: "c5.large"
+az_cedge_vm_size: "Standard_D2_v2"
+
+az_cedge_image_offer: "cisco-c8000v-byol"
+az_cedge_image_publisher: "cisco"
+az_cedge_image_sku: "17_13_01a-byol"
+az_cedge_image_version: "17.13.0120231222"
 
 # If no edge instances configured, they will be automatically created
 # based on the PnP Portal information.

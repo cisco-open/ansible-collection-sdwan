@@ -8,14 +8,13 @@
 - name: Test provided configuration data. No cloud auth checks. No system changes.
   hosts: localhost
   vars_files:
+    - ./pnp_credentials.yml
     - ./sdwan_config.yml
   vars:
     required_variables:
       organization_name: "{{ organization_name | default() }}"
       aws_region: "{{ aws_region | default() }}"
       aws_availibility_zone: "{{ aws_availibility_zone | default() }}"
-      pnp_username: "{{ pnp_username | default() }}"
-      pnp_password: "{{ pnp_password | default() }}"
       aws_allowed_subnets: "{{ aws_allowed_subnets | default() }}"
       aws_vmanage_ami_id: "{{ aws_vmanage_ami_id | default() }}"
       aws_vbond_ami_id: "{{ aws_vbond_ami_id | default() }}"
@@ -40,3 +39,28 @@
         loop_var: variable
         label: "{{ variable.key }}"
       when: required_variables is defined
+
+    - name: Sensitive data assertion `pnp_username` and `pnp_password`
+      ansible.builtin.assert:
+        that:
+          - required_var
+          - required_var is defined
+          - required_var != None
+          - required_var != "None"
+          - required_var != ""
+          - required_var | length > 0
+        fail_msg: "Required variables: `pnp_username` and `pnp_password` variables are missing"
+        quiet: true
+      loop:
+        - "{{ pnp_username }}"
+        - "{{ pnp_password }}"
+      loop_control:
+        loop_var: required_var
+      no_log: true
+      register: pnp_vars
+      ignore_errors: true  # ignore because we cannot log any message withing this task, instead we fail in next one
+
+    - name: Assert that required `pnp_username` and `pnp_password` variables are provided
+      ansible.builtin.fail:
+        msg: "Required variables: `pnp_username` and `pnp_password` variables are missing"
+      when: pnp_vars is defined and (pnp_vars.failed|default(False))

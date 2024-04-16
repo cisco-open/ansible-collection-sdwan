@@ -2,12 +2,12 @@
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 
-# Deploy Cisco SD-WAN version 20.13 on AWS
+# Deploy Cisco SD-WAN on AWS
 - name: Deploy Cisco SD-WAN versions 20.13 on AWS
   hosts: localhost
   gather_facts: false
   vars_files:
-    ./sdwan_config.yml
+    ./aws_sdwan_config.yml
   tasks:
   roles:
     - cisco.sdwan_deployment.aws_network_infrastructure
@@ -18,7 +18,8 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./sdwan_config.yml
+    - ./aws_sdwan_config.yml
+    - ./pnp_credentials.yml
     - "{{ results_path_controllers }}"
   roles:
     - cisco.catalystwan.api_ready
@@ -30,7 +31,8 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./sdwan_config.yml
+    - ./aws_sdwan_config.yml
+    - ./pnp_credentials.yml
     - "{{ results_path_controllers }}"
   roles:
     - cisco.catalystwan.sync_pnp_edges
@@ -41,7 +43,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./sdwan_config.yml
+    - ./aws_sdwan_config.yml
     - "{{ results_path_controllers }}"
     - "{{ deployment_edges_config }}"
   roles:
@@ -53,7 +55,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./sdwan_config.yml
+    - ./aws_sdwan_config.yml
     - "{{ results_path_controllers }}"
     - "{{ results_path_edges }}"
   roles:
@@ -65,7 +67,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./sdwan_config.yml
+    - ./aws_sdwan_config.yml
     - "{{ results_path_controllers }}"
     - "{{ results_path_edges }}"
   vars:
@@ -81,7 +83,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./sdwan_config.yml
+    - ./aws_sdwan_config.yml
     - "{{ results_path_controllers }}"
     - "{{ results_path_edges }}"
   roles:

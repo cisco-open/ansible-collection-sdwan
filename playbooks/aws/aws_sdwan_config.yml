@@ -1,0 +1,90 @@
+# Copyright 2024 Cisco Systems, Inc. and its affiliates
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+
+# Minimal configuration file to deploy vManage, vBond, vSmart and cEdge instances
+
+#######################################
+#     Required configuration data     #
+#######################################
+
+organization_name: null
+
+
+#####################################
+#     General AWS configuration     #
+#####################################
+
+aws_region: us-east-1
+aws_availibility_zone: us-east-1a
+aws_resources_prefix: "{{ organization_name }}"
+
+# aws_allowed_subnets is list of subnets, that are allowed to access your instances via security group in AWS
+# See https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html to learn more
+#
+# example configuration is:
+# aws_allowed_subnets:
+#   - 15.15.0.0/16
+#   - 10.10.0.0/16
+aws_allowed_subnets: null
+
+
+###############################
+#          Controllers        #
+###############################
+
+# vManage
+aws_vmanage_ami_id: null
+aws_vmanage_instance_type: "c5.9xlarge"
+
+vmanage_instances:
+  - hostname: "{{ aws_resources_prefix }}-vManage"
+    system_ip: 192.168.1.1
+    site_id: 111
+
+
+# vBond
+aws_vbond_ami_id: null
+aws_vbond_instance_type: "c5.large"
+
+vbond_instances:
+  - hostname: "{{ aws_resources_prefix }}-vBond"
+    system_ip: 192.168.3.1
+    site_id: 222
+
+
+# vSmart
+aws_vsmart_ami_id: null
+aws_vsmart_instance_type: "c5.large"
+
+vsmart_instances:
+  - hostname: "{{ aws_resources_prefix }}-vSmart"
+    system_ip: 192.168.2.1
+    site_id: 333
+
+
+
+
+################################
+#          Edge devices        #
+################################
+
+# cedge C8000K
+aws_cedge_ami_id: null
+aws_cedge_instance_type: "c5.large"
+
+# If no edge instances configured, they will be automatically created
+# based on the PnP Portal information.
+# See `deployment_edges_config` to inspect result
+
+
+##########################################
+#       Reusable deployment facts        #
+##########################################
+
+results_dir: "{{ playbook_dir }}/results"
+results_path_controllers: "{{ results_dir }}/controllers.yml"
+results_path_edges: "{{ results_dir }}/edges.yml"
+
+# Required by role: cisco.catalystwan.sync_pnp_edges
+deployment_edges_config: "{{ results_dir }}/edges_from_pnp_bootstrap.yml"

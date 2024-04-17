@@ -6,7 +6,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./sdwan_config.yml
+    - ./your_sdwan_config.yml
     - "{{ results_path_controllers }}"
   vars:
     remote_server_name: null

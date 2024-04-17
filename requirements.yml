@@ -8,4 +8,4 @@ collections:
     version: main
   - name: git@github.com:cisco-open/ansible-collection-sdwan-deployment.git
     type: git
-    version: fr/azure
+    version: main

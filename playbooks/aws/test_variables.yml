@@ -9,7 +9,7 @@
   hosts: localhost
   vars_files:
     - ./pnp_credentials.yml
-    - ./sdwan_config.yml
+    - ./aws_sdwan_config.yml
   vars:
     required_variables:
       organization_name: "{{ organization_name | default() }}"

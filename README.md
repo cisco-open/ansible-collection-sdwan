@@ -1,17 +1,17 @@
 # Cisco SDWAN aaC
 
 ```text
-                                                          
-            ┌───────────────────────────────┐             
-            │          cisco.sdwan          │             
-            └───────▲───────────────▲───────┘             
-                    │               │                     
-             ┌──────┘               └──────┐              
-             │                             │              
- ┌───────────┴──────────────┐    ┌─────────┴──────────┐   
- │  cisco.sdwan_deployment  │    │ cisco.catalystwan  │   
- └──────────────────────────┘    └────────────────────┘   
-                                                                                                                    
+
+            ┌───────────────────────────────┐
+            │          cisco.sdwan          │
+            └───────▲───────────────▲───────┘
+                    │               │
+             ┌──────┘               └──────┐
+             │                             │
+ ┌───────────┴──────────────┐    ┌─────────┴──────────┐
+ │  cisco.sdwan_deployment  │    │ cisco.catalystwan  │
+ └──────────────────────────┘    └────────────────────┘
+
 ```
 
 [ansible-collection-sdwan](https://github.com/cisco-open/ansible-collection-sdwan) combine [SDWAN Deployment](https://github.com/cisco-open/ansible-collection-sdwan-deployment) and
@@ -153,7 +153,7 @@ and for aws `playbooks/aws/pnp_credentials.yml`.
 Encrypt the pnp credentials file with your valut password by running:
 
 ```bash
-ansible-vault encrypt --vault-password-file=vault-password.txt playbooks/azure/pnp_credentials.yml 
+ansible-vault encrypt --vault-password-file=vault-password.txt playbooks/azure/pnp_credentials.yml
 ```
 
 From now, `playbooks/azure/pnp_credentials.yml` or `playbooks/aws/pnp_credentials.yml` file will be encrypted.

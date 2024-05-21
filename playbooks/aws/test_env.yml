@@ -17,5 +17,5 @@
         manager_authentication:
           url: "dummy"
           username: "dummy"
-          password: "dummy"
+          password: "dummy"  # pragma: allowlist secret
       check_mode: true

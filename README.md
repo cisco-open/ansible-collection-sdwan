@@ -22,14 +22,16 @@ Let users to fully deploy, onboard and upgrade their SD-WAN topology.
 ## Table of Contents
 
 - [Overview](#overview)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Usage](#usage)
+- [Requirements](#requirements)
+- [Installing this collection](#installing-this-collection)
+- [Using this collection](#using-this-collection)
 - [Troubleshooting](#troubleshooting)
 - [Containerized variant WIP](#containerized-variant-wip)
+- [Contributing](#contributing)
 - [Useful links and Getting Started](#useful-links-and-getting-started)
 - [License](#license)
-- [Contributing](#contributing)
+- [Code of Conduct](#code-of-conduct)
+- [Releasing, Versioning and Depracation](#releasing-versioning-and-deprecation)
 
 ---
 
@@ -44,7 +46,7 @@ By leveraging these Ansible resources, [ansible-collection-sdwan](https://github
 
 [ansible-collection-sdwan](https://github.com/cisco-open/ansible-collection-sdwan) illustrates the power of Ansible's modularity and the significant benefits of using roles, custom modules, and collections for automating network operations. It stands as an indispensable resource for organizations looking to implement Infrastructure as Code (IaC) within their network infrastructure and embrace a more agile and DevOps-oriented approach to network management.
 
-## Prerequisites
+## Requirements
 
 This project utilizes a tech stack that includes Python, Ansible (and Ansible Galaxy), AWS cloud (Boto/Boto3, authentication with AWS CLI)
 Azure cloud (ansible azure collection) and finally Cisco SD-WAN.
@@ -90,7 +92,7 @@ Current version of the full workflow for bringup SD-WAN assumes that users are f
 
 ---
 
-## Installation
+## Installing this collection
 
 With supported version of Python (>=3.10) installed, you can first set up your environment with:
 
@@ -126,7 +128,7 @@ If playbook finished without any failed tasks, environment is ready for next tas
 
 If requirements have been installed and tasks returned information about missing packages, please see [Troubleshooting](#troubleshooting)
 
-## Usage
+## Using this collection
 
 ### Ansible Vault prerequisite
 
@@ -320,3 +322,13 @@ See [LICENSE](./LICENSE) file.
 ## Contributing
 
 See [Contributing](./docs/CONTRIBUTING.md) file.
+
+## Code of Conduct
+
+See [Code of Conduct](./docs/CODE_OF_CONDUCT.md) file.
+
+## Releasing, Versioning and Deprecation
+
+This collection follows Semantic Versioning. More details on versioning can be found in [Understanding collection versioning](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections_distributing.html#understanding-collection-versioning).
+
+New minor and major releases as well as deprecations will follow new releases and deprecations of the Cisco Catalystwan SDK, a Python SDK, which this project relies on.

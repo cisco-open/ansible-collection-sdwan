@@ -1,0 +1,18 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/ansible-community/ansible-lint.git
+    rev: v24.2.1 # latest release tag from https://github.com/ansible-community/ansible-lint/releases/
+    hooks:
+      - id: ansible-lint
+        files: \.(yaml|yml)$
+
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets

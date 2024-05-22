@@ -20,6 +20,7 @@
       aws_vbond_ami_id: "{{ aws_vbond_ami_id | default() }}"
       aws_vsmart_ami_id: "{{ aws_vsmart_ami_id | default() }}"
       aws_cedge_ami_id: "{{ aws_cedge_ami_id | default() }}"
+      admin_password: "{{ admin_password | default() }}"
   tasks:
     - name: Assert that required variables are provided
       ansible.builtin.assert:

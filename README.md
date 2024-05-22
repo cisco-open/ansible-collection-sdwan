@@ -197,7 +197,7 @@ In order to run playbook that requires pnp_credentials, users have to specify pa
 Example:
 
 ```bash
-ansible-playbook playbooks/azure/test_vault_usage.yml --vault-password-file=vault-password.txt
+ansible-playbook playbooks/azure/non-existing-exmple.yml --vault-password-file=vault-password.txt
 ```
 
 ### Configuration file

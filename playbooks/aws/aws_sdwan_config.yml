@@ -33,6 +33,8 @@ aws_allowed_subnets: null
 #          Controllers        #
 ###############################
 
+admin_password: null
+
 # vManage
 aws_vmanage_ami_id: null
 aws_vmanage_instance_type: "c5.9xlarge"

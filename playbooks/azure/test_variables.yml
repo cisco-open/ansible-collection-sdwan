@@ -22,6 +22,7 @@
       az_cedge_image_publisher: "{{ az_cedge_image_publisher | default() }}"
       az_cedge_image_sku: "{{ az_cedge_image_sku | default() }}"
       az_cedge_image_version: "{{ az_cedge_image_version | default() }}"
+      admin_password: "{{ admin_password | default() }}"
   tasks:
     - name: Assert that required variables are provided
       ansible.builtin.assert:

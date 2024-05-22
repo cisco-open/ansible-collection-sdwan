@@ -94,21 +94,56 @@ Current version of the full workflow for bringup SD-WAN assumes that users are f
 
 ## Installing this collection
 
-With supported version of Python (>=3.10) installed, you can first set up your environment with:
+### Install by cloning this repostiory - recommended way
+
+You can install collection by first cloning this repository:
+
+```bash
+git clone git@github.com:cisco-open/ansible-collection-sdwan.git
+```
+
+Then setting your python environment.
+Recommended way: use supported version of Python (>=3.10) and set up your environment with:
+
+```bash
+python3 -m venv <your-venv-name>
+source <your-venv-name>/bin/activate
+pip install -r requirements.txt --no-deps
+```
+
+And then install ansible requirements:
+
+```bash
+ansible-galaxy install -r requirements.yml
+```
+
+### Install with Ansible Galaxy
+
+***Note*** that when installing this collection with `ansible-galaxy` command, it will be placed inside your system collections path. That migth introduce additional complexity for using configuration files etc.
+
+You can install this collection with the Ansible Galaxy CLI (requires `ansible` package installed)
+
+```bash
+ansible-galaxy collection install cisco.sdwan
+```
+
+The python module dependencies are not installed by ansible-galaxy. They can be manually installed using pip.
+Recommended way: use supported version of Python (>=3.10) and set up your environment with:
 
 ```bash
 python3 -m venv <your-venv-name>
 source <your-venv-name>/bin/activate
 ```
 
-And then install python and ansible requirements:
+And then install python requirements:
 
 ```bash
 pip install -r requirements.txt --no-deps
-ansible-galaxy install -r requirements.yml
 ```
 
-Note: For python packages installation troubleshooting see [python-packages-installation](#5-python-packages-installation)
+</br></br>
+
+***Note***: For python packages installation troubleshooting see [python-packages-installation](#5-python-packages-installation)
 
 Verify that your ansible version is using python modules from vevn by using test playbook:
 

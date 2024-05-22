@@ -21,7 +21,7 @@ tags:
   - networking
 
 dependencies:
-  "cisco.sdwan_deployment": ">=0.1.0"
+  "cisco.sdwan_deployment": ">=0.1.1"
   "cisco.catalystwan": ">=0.1.1"
   "amazon.aws": ">=6.5.0"
   "azure.azcollection": ">=1.19.0"

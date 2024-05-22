@@ -22,7 +22,7 @@ az_resources_prefix: "{{ organization_name }}"
 # az_allowed_subnets: is list of subnets, that are allowed to access your instances
 #
 # example configuration is:
-az_allowed_subnets: null 
+az_allowed_subnets: null
 
 
 ###############################

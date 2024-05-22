@@ -15,7 +15,7 @@
     remote_server_password: null
     remote_server_image_location_prefix: null
     vmanage_remote_software_filename: null
-    viptela_remote_software_filename: null 
+    viptela_remote_software_filename: null
     cedge_remote_software_filename: null
     controller_software_version_to_activate: null  # For Remote Images that don't report its version in repository, we have to provide that value directly
     edge_software_version_to_activate: null  # For Remote Images that don't report its version in repository, we have to provide that value directly

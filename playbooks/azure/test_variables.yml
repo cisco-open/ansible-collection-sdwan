@@ -22,6 +22,7 @@
       az_cedge_image_publisher: "{{ az_cedge_image_publisher | default() }}"
       az_cedge_image_sku: "{{ az_cedge_image_sku | default() }}"
       az_cedge_image_version: "{{ az_cedge_image_version | default() }}"
+      admin_password: "{{ admin_password | default() }}"
   tasks:
     - name: Assert that required variables are provided
       ansible.builtin.assert:
@@ -65,4 +66,4 @@
     - name: Assert that required `pnp_username` and `pnp_password` variables are provided
       ansible.builtin.fail:
         msg: "Required variables: `pnp_username` and `pnp_password` variables are missing"
-      when: pnp_vars is defined and (pnp_vars.failed|default(False))
+      when: pnp_vars is defined and (pnp_vars.failed | default(False))

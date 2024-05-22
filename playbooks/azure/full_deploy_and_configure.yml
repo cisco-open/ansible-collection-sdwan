@@ -50,7 +50,6 @@
     - cisco.sdwan_deployment.azure_edges
 
 
-
 # Onboard edge devices and wait for their reachability
 - name: Activate and validate edge devices
   hosts: localhost

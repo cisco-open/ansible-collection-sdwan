@@ -1,0 +1,29 @@
+namespace: cisco
+name: sdwan
+version: 0.1.0
+readme: README.md
+authors:
+  - Arkadiusz Cichon <acichon@cisco.com>
+description: Ansible collection to provide full workflows for deployment, upgrades and configuration
+
+repository: https://github.com/cisco-open/ansible-collection-sdwan
+documentation: https://github.com/cisco-open/ansible-collection-sdwan/blob/main/README.md
+homepage: https://github.com/cisco-open/ansible-collection-sdwan
+issues: https://github.com/cisco-open/ansible-collection-sdwan/issues
+
+license:
+  - "GPL-3.0-only"
+
+tags:
+  - cisco
+  - sdwan
+  - catalystwan
+  - networking
+
+dependencies:
+  "cisco.sdwan_deployment": ">=0.1.1"
+  "cisco.catalystwan": ">=0.1.1"
+  "amazon.aws": ">=6.5.0"
+  "azure.azcollection": ">=1.19.0"
+
+build_ignore: []

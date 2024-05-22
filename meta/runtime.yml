@@ -1,0 +1,3 @@
+# meta/runtime.yml
+---
+requires_ansible: '>=2.16.6'

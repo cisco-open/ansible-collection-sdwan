@@ -22,13 +22,14 @@ az_resources_prefix: "{{ organization_name }}"
 # az_allowed_subnets: is list of subnets, that are allowed to access your instances
 #
 # example configuration is:
-# az_allowed_subnets:
-#   - 15.15.0.0/16
-#   - 10.10.0.0/16
+az_allowed_subnets: null
+
 
 ###############################
 #          Controllers        #
 ###############################
+
+admin_password: null
 
 # vManage
 az_vmanage_image_vhd_source: null

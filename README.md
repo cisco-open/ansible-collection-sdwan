@@ -1,17 +1,17 @@
 # Cisco SDWAN aaC
 
 ```text
-                                                          
-            ┌───────────────────────────────┐             
-            │          cisco.sdwan          │             
-            └───────▲───────────────▲───────┘             
-                    │               │                     
-             ┌──────┘               └──────┐              
-             │                             │              
- ┌───────────┴──────────────┐    ┌─────────┴──────────┐   
- │  cisco.sdwan_deployment  │    │ cisco.catalystwan  │   
- └──────────────────────────┘    └────────────────────┘   
-                                                                                                                    
+
+            ┌───────────────────────────────┐
+            │          cisco.sdwan          │
+            └───────▲───────────────▲───────┘
+                    │               │
+             ┌──────┘               └──────┐
+             │                             │
+ ┌───────────┴──────────────┐    ┌─────────┴──────────┐
+ │  cisco.sdwan_deployment  │    │ cisco.catalystwan  │
+ └──────────────────────────┘    └────────────────────┘
+
 ```
 
 [ansible-collection-sdwan](https://github.com/cisco-open/ansible-collection-sdwan) combine [SDWAN Deployment](https://github.com/cisco-open/ansible-collection-sdwan-deployment) and
@@ -22,14 +22,16 @@ Let users to fully deploy, onboard and upgrade their SD-WAN topology.
 ## Table of Contents
 
 - [Overview](#overview)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Usage](#usage)
+- [Requirements](#requirements)
+- [Installing this collection](#installing-this-collection)
+- [Using this collection](#using-this-collection)
 - [Troubleshooting](#troubleshooting)
 - [Containerized variant WIP](#containerized-variant-wip)
+- [Contributing](#contributing)
 - [Useful links and Getting Started](#useful-links-and-getting-started)
 - [License](#license)
-- [Contributing](#contributing)
+- [Code of Conduct](#code-of-conduct)
+- [Releasing, Versioning and Depracation](#releasing-versioning-and-deprecation)
 
 ---
 
@@ -44,7 +46,7 @@ By leveraging these Ansible resources, [ansible-collection-sdwan](https://github
 
 [ansible-collection-sdwan](https://github.com/cisco-open/ansible-collection-sdwan) illustrates the power of Ansible's modularity and the significant benefits of using roles, custom modules, and collections for automating network operations. It stands as an indispensable resource for organizations looking to implement Infrastructure as Code (IaC) within their network infrastructure and embrace a more agile and DevOps-oriented approach to network management.
 
-## Prerequisites
+## Requirements
 
 This project utilizes a tech stack that includes Python, Ansible (and Ansible Galaxy), AWS cloud (Boto/Boto3, authentication with AWS CLI)
 Azure cloud (ansible azure collection) and finally Cisco SD-WAN.
@@ -90,23 +92,58 @@ Current version of the full workflow for bringup SD-WAN assumes that users are f
 
 ---
 
-## Installation
+## Installing this collection
 
-With supported version of Python (>=3.10) installed, you can first set up your environment with:
+### Install by cloning this repostiory - recommended way
+
+You can install collection by first cloning this repository:
+
+```bash
+git clone git@github.com:cisco-open/ansible-collection-sdwan.git
+```
+
+Then setting your python environment.
+Recommended way: use supported version of Python (>=3.10) and set up your environment with:
+
+```bash
+python3 -m venv <your-venv-name>
+source <your-venv-name>/bin/activate
+pip install -r requirements.txt --no-deps
+```
+
+And then install ansible requirements:
+
+```bash
+ansible-galaxy install -r requirements.yml
+```
+
+### Install with Ansible Galaxy
+
+***Note*** that when installing this collection with `ansible-galaxy` command, it will be placed inside your system collections path. That migth introduce additional complexity for using configuration files etc.
+
+You can install this collection with the Ansible Galaxy CLI (requires `ansible` package installed)
+
+```bash
+ansible-galaxy collection install cisco.sdwan
+```
+
+The python module dependencies are not installed by ansible-galaxy. They can be manually installed using pip.
+Recommended way: use supported version of Python (>=3.10) and set up your environment with:
 
 ```bash
 python3 -m venv <your-venv-name>
 source <your-venv-name>/bin/activate
 ```
 
-And then install python and ansible requirements:
+And then install python requirements:
 
 ```bash
 pip install -r requirements.txt --no-deps
-ansible-galaxy install -r requirements.yml
 ```
 
-Note: For python packages installation troubleshooting see [python-packages-installation](#5-python-packages-installation)
+</br></br>
+
+***Note***: For python packages installation troubleshooting see [python-packages-installation](#5-python-packages-installation)
 
 Verify that your ansible version is using python modules from vevn by using test playbook:
 
@@ -126,7 +163,7 @@ If playbook finished without any failed tasks, environment is ready for next tas
 
 If requirements have been installed and tasks returned information about missing packages, please see [Troubleshooting](#troubleshooting)
 
-## Usage
+## Using this collection
 
 ### Ansible Vault prerequisite
 
@@ -151,7 +188,7 @@ and for aws `playbooks/aws/pnp_credentials.yml`.
 Encrypt the pnp credentials file with your valut password by running:
 
 ```bash
-ansible-vault encrypt --vault-password-file=vault-password.txt playbooks/azure/pnp_credentials.yml 
+ansible-vault encrypt --vault-password-file=vault-password.txt playbooks/azure/pnp_credentials.yml
 ```
 
 From now, `playbooks/azure/pnp_credentials.yml` or `playbooks/aws/pnp_credentials.yml` file will be encrypted.
@@ -160,7 +197,7 @@ In order to run playbook that requires pnp_credentials, users have to specify pa
 Example:
 
 ```bash
-ansible-playbook playbooks/azure/test_vault_usage.yml --vault-password-file=vault-password.txt
+ansible-playbook playbooks/azure/non-existing-exmple.yml --vault-password-file=vault-password.txt
 ```
 
 ### Configuration file
@@ -320,3 +357,13 @@ See [LICENSE](./LICENSE) file.
 ## Contributing
 
 See [Contributing](./docs/CONTRIBUTING.md) file.
+
+## Code of Conduct
+
+See [Code of Conduct](./docs/CODE_OF_CONDUCT.md) file.
+
+## Releasing, Versioning and Deprecation
+
+This collection follows Semantic Versioning. More details on versioning can be found in [Understanding collection versioning](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections_distributing.html#understanding-collection-versioning).
+
+New minor and major releases as well as deprecations will follow new releases and deprecations of the Cisco Catalystwan SDK, a Python SDK, which this project relies on.

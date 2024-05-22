@@ -20,6 +20,7 @@
       aws_vbond_ami_id: "{{ aws_vbond_ami_id | default() }}"
       aws_vsmart_ami_id: "{{ aws_vsmart_ami_id | default() }}"
       aws_cedge_ami_id: "{{ aws_cedge_ami_id | default() }}"
+      admin_password: "{{ admin_password | default() }}"
   tasks:
     - name: Assert that required variables are provided
       ansible.builtin.assert:
@@ -63,4 +64,4 @@
     - name: Assert that required `pnp_username` and `pnp_password` variables are provided
       ansible.builtin.fail:
         msg: "Required variables: `pnp_username` and `pnp_password` variables are missing"
-      when: pnp_vars is defined and (pnp_vars.failed|default(False))
+      when: pnp_vars is defined and (pnp_vars.failed | default(False))

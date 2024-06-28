@@ -22,7 +22,6 @@ jobs:
     uses: cisco-ospo/.github/.github/workflows/_scorecard.yml@main
     permissions:
       id-token: write
-      # pragma: allowlist secret
       security-events: write
     secrets: inherit
     with:

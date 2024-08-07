@@ -1,0 +1,22 @@
+# Copyright 2024 Cisco Systems, Inc. and its affiliates
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+# NOTE: This is example playbook that requires following variables:
+# manager_authentication: url, username, password
+# backup_dir_path
+
+- name: Example playbook with task to restore Device Templates with Policies and Feature Templates
+  hosts: localhost
+  gather_facts: false
+  vars:
+    manager_authentication: &manager_authentication
+      url: # your manager url
+      username: # your manager username
+      password: # your manager password
+  tasks:
+    - name: Restore configuration from provided backup directory
+      cisco.catalystwan.device_templates_recovery:
+        mode: restore
+        # backup_dir_path: # path to backup directory from which templates will be imported
+        manager_credentials:
+          <<: *manager_authentication

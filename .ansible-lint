@@ -21,6 +21,7 @@ verbosity: 1
 mock_modules:
   - cisco.catalystwan.wait_for_api_server
   - azure.azcollection.azure_rm_account_info
+  - cisco.catalystwan.device_templates_recovery
 #   - zuul_return
 #   # note the foo.bar is invalid as being neither a module or a collection
 #   - fake_namespace.fake_collection.fake_module
@@ -42,6 +43,7 @@ mock_roles:
   - cisco.catalystwan.activate_edges
   - cisco.catalystwan.vmanage_mode
   - cisco.catalystwan.health_checks
+
 
 #   - mocked_role
 #   - author.role_name # old standalone galaxy role

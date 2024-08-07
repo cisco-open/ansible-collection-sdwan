@@ -1,0 +1,23 @@
+# Copyright 2024 Cisco Systems, Inc. and its affiliates
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+---
+
+- name: Example playbook for backup of running config
+  hosts: localhost
+  gather_facts: false
+  vars:
+    manager_authentication: &manager_authentication
+      url: # your manager url
+      username: # your manager username
+      password: # your manager password
+  tasks:
+    - name: Backup running-config for all c8000V devices with default backup dir (in CWD)
+      cisco.catalystwan.devices_info:
+        backup: true
+        backup_dir_path: # your backup bath
+        filters:
+          personality: "vedge"
+        manager_credentials:
+          <<: *manager_authentication
+      register: backup_info

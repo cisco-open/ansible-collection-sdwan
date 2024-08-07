@@ -42,7 +42,12 @@ By leveraging these Ansible resources, [ansible-collection-sdwan](https://github
 
 - Automate Deployment: Roll out and provision Cisco SD-WAN controllers and edge devices with minimal manual intervention using [SDWAN Deployment](https://github.com/cisco-open/ansible-collection-sdwan-deployment) roles.
 - Onboarding of Controllers and Edge Devices: Simplify the process of integrating controllers and edge devices into the Cisco SD-WAN fabric, using automated deployment with PnP (Plug-and-Play), using [ansible-collection-catalystwan](https://github.com/cisco-open/ansible-collection-catalystwan) modules and roles.
-- Workflow for Upgrades: Structured workflow that automates the upgrade process for controllers and edge devices.
+- Workflow for Upgrades: Structured workflow that automates the upgrade process for controllers and edge devices. See [example playbook for upgrades](./playbooks/software_upgrades_with_remote_server.yml)
+- Workflows for backup and restore:
+  - Backup Device configuration (includes Device Templates, Policies, Feature Templates). See [backup device configuration](./playbooks/backup_restore/backup_device_configuration.yml)
+  - Restore Device configuration (includes Device Templates, Policies, Feature Templates). See [restore device configuration](./playbooks/backup_restore/restore_device_configuration.yml)
+  - Backup running config (cli templates). See [backup running config](./playbooks/backup_restore/backup_running_config.yml)
+  - Restore running config (cli templates). See [restore running config](./playbooks/backup_restore/restore_running_config.yml)
 
 [ansible-collection-sdwan](https://github.com/cisco-open/ansible-collection-sdwan) illustrates the power of Ansible's modularity and the significant benefits of using roles, custom modules, and collections for automating network operations. It stands as an indispensable resource for organizations looking to implement Infrastructure as Code (IaC) within their network infrastructure and embrace a more agile and DevOps-oriented approach to network management.
 

@@ -12,6 +12,7 @@ profile: production
 exclude_paths:
   - playbooks/aws/results/*
   - playbooks/azure/results/*
+  - .github/workflows/requirements.yml
 # parseable: true
 # quiet: true
 # strict: true

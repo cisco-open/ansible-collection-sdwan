@@ -3,9 +3,7 @@ collections:
     version: 6.5.0
   - name: azure.azcollection
     version: 1.19.0
-  - name: git@github.com:cisco-open/ansible-collection-catalystwan.git
-    type: git
-    version: main
-  - name: git@github.com:cisco-open/ansible-collection-sdwan-deployment.git
-    type: git
-    version: main
+  - name: cisco.catalystwan
+    version: 0.2.0
+  - name: cisco.sdwan_deployment
+    version: 0.2.0

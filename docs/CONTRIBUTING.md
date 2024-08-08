@@ -26,3 +26,11 @@ Select one from [issue form](https://github.com/cisco-open/ansible-collection-sd
 ### Create PR
 
 When you're finished with the changes, create a pull request, also known as a PR.
+
+---
+
+## Release process
+
+According to [release workflow inside .github workflows](../.github/workflows/release-from-tag.yml) collection publication to Ansible Galaxy will happen when admin of the repository will push new tag.
+This tag must much version used in [galaxy.yml](../galaxy.yml) file.
+Release will happen only if desired version was not published on Ansible Galaxy yet.

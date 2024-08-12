@@ -1,0 +1,11 @@
+---
+
+vmanage_instances:
+  - admin_password: # password
+    admin_username: # user
+    mgmt_public_ip: # mgmt_public_ip
+
+template_data:
+  admin_password: # admin_password
+  admin_username: # admin_username
+  vsmart_hostname: # vsmart_hostname

@@ -28,7 +28,7 @@
       cisco.catalystwan.feature_templates:
         state: present
         template_name: "AAA_for_vSmart"
-        template_description: "AAA Template for testing"
+        template_description: "AAA Template"
         device_models: vsmart
         aaa:
           auth_fallback: false
@@ -158,7 +158,7 @@
         manager_credentials:
           <<: *manager_authentication
 
-    - name: Attach example Device Template for vSmart
+    - name: Attach example Device Template to vSmart
       cisco.catalystwan.device_templates:
         state: attached
         template_name: "vSmart-test-device-template"
@@ -169,5 +169,12 @@
           - "//system/host-name": "{{ template_data.vsmart_hostname }}"
           - "//system/system-ip": "192.168.2.1"
           - "//system/ipv6-strict-control": false
+        manager_credentials:
+          <<: *manager_authentication
+
+    - name: Detach example Device Template from vSmart
+      cisco.catalystwan.device_templates:
+        state: detached
+        hostname: "{{ template_data.vsmart_hostname }}"
         manager_credentials:
           <<: *manager_authentication

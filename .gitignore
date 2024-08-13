@@ -1,4 +1,6 @@
 .vscode
+ansible_catalystwan_module.log
+ansible_catalystwan.log
 ansible.log
 poetry.lock
 run
@@ -6,12 +8,8 @@ playbooks/shared/
 playbooks/results/
 playbooks/aws/results/
 playbooks/azure/results/
-playbooks/ansible_catalystwan.log
-playbooks/aws/ansible_catalystwan.log
-playbooks/azure/ansible_catalystwan.log
-playbooks/ansible_catalystwan_module.log
-playbooks/azure/ansible_catalystwan_module.log
-playbooks/aws/ansible_catalystwan_module.log
 vault-password.txt
 playbooks/catalystwan.log
 playbooks/sdwan_config_dev.yml
+playbooks/templates_examples/output_backup_device_configuration
+playbooks/templates_examples/output_backup_running_config

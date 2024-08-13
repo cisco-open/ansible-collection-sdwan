@@ -26,6 +26,9 @@ mock_modules:
   - cisco.catalystwan.cli_templates
   - cisco.catalystwan.device_templates
   - cisco.catalystwan.devices_info
+  - cisco.catalystwan.feature_templates
+  - cisco.catalystwan.device_templates_info
+  - cisco.catalystwan.feature_templates_info
 #   - zuul_return
 #   # note the foo.bar is invalid as being neither a module or a collection
 #   - fake_namespace.fake_collection.fake_module

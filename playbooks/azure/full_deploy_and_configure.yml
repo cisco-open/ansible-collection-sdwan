@@ -27,6 +27,20 @@
     - cisco.catalystwan.onboarding_controllers
 
 
+- name: Cluster configuration
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - ./azure_sdwan_config.yml
+    - ./pnp_credentials.yml
+    - "{{ results_path_controllers }}"
+  tasks:
+    - name: Configure cluster setup if required
+      ansible.builtin.include_role:
+        name: cisco.catalystwan.cluster
+      when: (vmanage_instances | first).cluster_private_ip is defined
+
+
 - name: Generate bootstrap configuration for synced edges
   hosts: localhost
   gather_facts: false

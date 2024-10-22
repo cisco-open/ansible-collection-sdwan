@@ -13,3 +13,4 @@ playbooks/catalystwan.log
 playbooks/sdwan_config_dev.yml
 playbooks/templates_examples/output_backup_device_configuration
 playbooks/templates_examples/output_backup_running_config
+.idea

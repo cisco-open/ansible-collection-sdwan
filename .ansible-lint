@@ -45,6 +45,7 @@ mock_roles:
   - cisco.catalystwan.software_upgrades_remote
   - cisco.catalystwan.api_ready
   - cisco.catalystwan.administration_settings
+  - cisco.catalystwan.cluster
   - cisco.catalystwan.onboarding_controllers
   - cisco.catalystwan.sync_pnp_edges
   - cisco.catalystwan.activate_edges

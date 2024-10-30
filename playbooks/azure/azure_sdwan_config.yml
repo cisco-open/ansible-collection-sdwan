@@ -41,7 +41,13 @@ vmanage_instances:
   - hostname: "{{ az_resources_prefix }}-vManage"
     system_ip: 192.168.1.1
     site_id: "{{ site_id_vmanage }}"
-
+# uncomment for cluster deployment
+#  - hostname: "{{ az_resources_prefix }}-vManage2"
+#    system_ip: 192.168.4.1
+#    site_id: "{{ site_id_vmanage | int + 1 }}"
+#  - hostname: "{{ az_resources_prefix }}-vManage3"
+#    system_ip: 192.168.5.1
+#    site_id: "{{ site_id_vmanage | int + 2 }}"
 
 # vBond
 az_vbond_image_vhd_source: null

@@ -43,6 +43,13 @@ vmanage_instances:
   - hostname: "{{ aws_resources_prefix }}-vManage"
     system_ip: 192.168.1.1
     site_id: 111
+# uncomment for cluster deployment
+#  - hostname: "{{ aws_resources_prefix }}-vManage2"
+#    system_ip: 192.168.4.1
+#    site_id: 112
+#  - hostname: "{{ aws_resources_prefix }}-vManage3"
+#    system_ip: 192.168.5.1
+#    site_id: 113
 
 
 # vBond

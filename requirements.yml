@@ -6,4 +6,4 @@ collections:
   - name: cisco.catalystwan
     version: 0.3.0
   - name: cisco.sdwan_deployment
-    version: 0.3.1
+    version: 0.3.2

@@ -7,7 +7,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    ./dev_config_aws.yml
+    ./aws_sdwan_config.yml
   tasks:
   roles:
     - cisco.sdwan_deployment.aws_network_infrastructure
@@ -18,7 +18,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./dev_config_aws.yml
+    - ./aws_sdwan_config.yml
     - ./pnp_credentials.yml
     - "{{ results_path_controllers }}"
   roles:
@@ -31,7 +31,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./dev_config_aws.yml
+    - ./aws_sdwan_config.yml
     - ./pnp_credentials.yml
     - "{{ results_path_controllers }}"
   roles:
@@ -43,7 +43,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./dev_config_aws.yml
+    - ./aws_sdwan_config.yml
     - "{{ results_path_controllers }}"
     - "{{ deployment_edges_config }}"
   roles:
@@ -55,7 +55,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./dev_config_aws.yml
+    - ./aws_sdwan_config.yml
     - "{{ results_path_controllers }}"
     - "{{ results_path_edges }}"
   roles:
@@ -67,7 +67,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./dev_config_aws.yml
+    - ./aws_sdwan_config.yml
     - "{{ results_path_controllers }}"
   roles:
     - cisco.catalystwan.vmanage_mode
@@ -76,7 +76,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./dev_config_aws.yml
+    - ./aws_sdwan_config.yml
     - "{{ results_path_controllers }}"
   vars:
     min_version_required: "20.13.1"
@@ -95,7 +95,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./dev_config_aws.yml
+    - ./aws_sdwan_config.yml
     - "{{ playbook_dir }}/results/generated_feature_profiles.yml"
     - "{{ results_path_controllers }}"
     - "{{ results_path_edges }}"
@@ -110,7 +110,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./dev_config_aws.yml
+    - ./aws_sdwan_config.yml
     - "{{ results_path_controllers }}"
     - "{{ results_path_edges }}"
   roles:

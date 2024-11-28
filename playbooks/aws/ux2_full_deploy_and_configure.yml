@@ -63,16 +63,25 @@
 
 
 # Attach templates with running-config for all devices
-- name: Set vmanage mode for all devices
+- name: Set vmanage mode for controllers
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - ./dev_config_aws.yml
+    - "{{ results_path_controllers }}"
+  roles:
+    - cisco.catalystwan.vmanage_mode
+
+- name: Check if vManage version matches requirements
   hosts: localhost
   gather_facts: false
   vars_files:
     - ./dev_config_aws.yml
     - "{{ results_path_controllers }}"
   vars:
-    edge_instances: "{{ deployed_edge_instances }}"
+    min_version_required: "20.13.1"
   roles:
-    - cisco.catalystwan.vmanage_mode
+    - cisco.catalystwan.vmanage_version
 
 - name: Build feature profile data
   hosts: localhost

@@ -4,6 +4,6 @@ collections:
   - name: azure.azcollection
     version: 1.19.0
   - name: cisco.catalystwan
-    version: 0.3.1
+    version: 0.3.2
   - name: cisco.sdwan_deployment
     version: 0.3.3

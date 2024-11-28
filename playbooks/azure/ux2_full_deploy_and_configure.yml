@@ -80,6 +80,17 @@
   roles:
     - cisco.catalystwan.feature_profile_builder
 
+- name: Check if vManage version matches requirements
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - ./azure_sdwan_config.yml
+    - "{{ results_path_controllers }}"
+  vars:
+    min_version_required: "20.13.1"
+  roles:
+    - cisco.catalystwan.vmanage_version
+
 - name: Create Config Groups
   hosts: localhost
   gather_facts: false

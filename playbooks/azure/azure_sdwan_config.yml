@@ -24,6 +24,11 @@ az_resources_prefix: "{{ organization_name }}"
 # example configuration is:
 az_allowed_subnets: null
 
+#######################################
+#     Deployment configuration        #
+#######################################
+
+ux20_deployment: true  # NOTE remove or set to false for UX1.0 deployment
 
 ###############################
 #          Controllers        #
@@ -77,7 +82,8 @@ vsmart_instances:
 ################################
 
 # cedge C8000K
-az_cedge_vm_size: "Standard_D2_v2"
+az_cedge_vm_size: "Standard_D4_v2"
+# az_cedge_vm_size: "Standard_D2_v2"  # NOTE optionally uncomment for UX1.0 deployment
 
 az_cedge_image_offer: "cisco-c8000v-byol"
 az_cedge_image_publisher: "cisco"

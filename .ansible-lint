@@ -51,6 +51,8 @@ mock_roles:
   - cisco.catalystwan.activate_edges
   - cisco.catalystwan.vmanage_mode
   - cisco.catalystwan.health_checks
+  - cisco.catalystwan.config_groups
+  - cisco.catalystwan.feature_profile_builder
 
 
 #   - mocked_role

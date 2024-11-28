@@ -1,0 +1,97 @@
+### TRANSPORT PARCELS
+
+wan_interface_ethernet_parcel:
+  template: ethernet
+  config:
+    data:
+      interfaceName:
+        optionType: variable
+        value: "{{ '{{vpn_0_transport_if}}' }}"
+      description:
+        optionType: global
+        value: WAN VPN 0 Interface
+    name: TRANSPORT
+    description: WAN VPN 0 Feature
+
+wan_vpn_parcel:
+  template: vpn
+  config:
+    name: VPN0
+    description: SDWAN Transport Wan Vpn Feature config
+  sub_parcels:
+    - "{{ wan_interface_ethernet_parcel }}"
+
+### SERVICE PARCELS
+
+lan_interface_ethernet_parcel:
+  template: ethernet
+  config:
+    name: VPN_Service_10_Interface
+    description: LAN Interface
+    data:
+      interfaceName:
+        optionType: variable
+        value: "{{ '{{vpn_10_if_0}}' }}"
+      intfIpAddress:
+        static:
+          staticIpV4AddressPrimary:
+            ipAddress:
+              optionType: variable
+              value: "{{ '{{vpn_10_if_0_static_ipaddr}}' }}"
+            subnetMask:
+              optionType: variable
+              value: "{{ '{{vpn_10_if_0_static_subnet}}' }}"
+
+lan_vpn_parcel:
+  template: vpn
+  config:
+    name: Service_Network
+    description: LAN VPN
+    data:
+      vpnId:
+        optionType: global
+        value: 10
+      name:
+        optionType: global
+        value: SERVICE
+  sub_parcels:
+    - "{{ lan_interface_ethernet_parcel }}"
+
+### FEATURE PROFILES
+
+name_prefix: "{{ config_group_name | default('ansible-generated') }}"
+
+system_profile:
+  name: "{{ name_prefix }}_Basic"
+  description: "{{ name_prefix }} Basic Profile"
+  parcels:
+    - template: banner
+    - template: basic
+    - template: bfd
+    - template: omp
+    - template: logging
+    - template: ntp
+    - template: global
+    - template: aaa
+    - template: mrf
+
+transport_profile:
+  name: "{{ name_prefix }}_WAN"
+  description: "{{ name_prefix }} Transport Profile"
+  parcels:
+    - "{{ wan_vpn_parcel }}"
+
+service_profile:
+  name: "{{ name_prefix }}_LAN"
+  description: "{{ name_prefix }} Service Profile"
+  parcels:
+    - "{{ lan_vpn_parcel }}"
+
+system_profiles:
+  - "{{ system_profile }}"
+
+transport_profiles:
+  - "{{ transport_profile }}"
+
+service_profiles:
+  - "{{ service_profile }}"

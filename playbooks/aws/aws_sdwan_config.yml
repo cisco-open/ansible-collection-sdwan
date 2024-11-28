@@ -28,11 +28,17 @@ aws_resources_prefix: "{{ organization_name }}"
 #   - 10.10.0.0/16
 aws_allowed_subnets: null
 
+#######################################
+#     Deployment configuration        #
+#######################################
+
+ux20_deployment: true  # NOTE remove or set to false for UX1.0 deployment
 
 ###############################
 #          Controllers        #
 ###############################
 
+# do not use 'admin' as password since it will cause the playbooks to fail
 admin_password: null
 
 # vManage
@@ -43,7 +49,7 @@ vmanage_instances:
   - hostname: "{{ aws_resources_prefix }}-vManage"
     system_ip: 192.168.1.1
     site_id: 111
-# uncomment for cluster deployment
+# NOTE uncomment for cluster deployment
 #  - hostname: "{{ aws_resources_prefix }}-vManage2"
 #    system_ip: 192.168.4.1
 #    site_id: 112

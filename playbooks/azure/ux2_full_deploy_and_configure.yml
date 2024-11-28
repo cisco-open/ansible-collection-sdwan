@@ -1,0 +1,106 @@
+# Copyright 2024 Cisco Systems, Inc. and its affiliates
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+
+# Deploy Cisco SD-WAN version 20.13 on Azure
+- name: Deploy Cisco SD-WAN versions 20.13 on Azure
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    azure_sdwan_config.yml
+  tasks:
+  roles:
+    - cisco.sdwan_deployment.azure_network_infrastructure
+    - cisco.sdwan_deployment.azure_controllers
+
+
+- name: Verify server connectivity, set initial configuration, onboard controllers
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - azure_sdwan_config.yml
+    - ./pnp_credentials.yml
+    - "{{ results_path_controllers }}"
+  roles:
+    - cisco.catalystwan.api_ready
+    - cisco.catalystwan.administration_settings
+    - cisco.catalystwan.onboarding_controllers
+
+
+- name: Generate bootstrap configuration for synced edges
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - azure_sdwan_config.yml
+    - ./pnp_credentials.yml
+    - "{{ results_path_controllers }}"
+  roles:
+    - cisco.catalystwan.sync_pnp_edges
+
+
+# Deploying edges requires vbond_mgmt_public_ip, otp and uuid!
+- name: Deploy Edge devices based on generated boostrap configuration
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - azure_sdwan_config.yml
+    - "{{ results_path_controllers }}"
+    - "{{ deployment_edges_config }}"
+  roles:
+    - cisco.sdwan_deployment.azure_edges
+
+
+# Onboard edge devices and wait for their reachability
+- name: Activate and validate edge devices
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - azure_sdwan_config.yml
+    - "{{ results_path_controllers }}"
+    - "{{ results_path_edges }}"
+  roles:
+    - cisco.catalystwan.activate_edges
+
+
+# Attach templates with running-config for all devices
+- name: Set vmanage mode for all devices
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - azure_sdwan_config.yml
+    - "{{ results_path_controllers }}"
+  roles:
+    - cisco.catalystwan.vmanage_mode
+
+- name: Build feature profile data
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - ./feature_profile_config.yml
+  roles:
+    - cisco.catalystwan.feature_profile_builder
+
+- name: Create Config Groups
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - azure_sdwan_config.yml
+    - "{{ playbook_dir }}/results/generated_feature_profiles.yml"
+    - "{{ results_path_controllers }}"
+    - "{{ results_path_edges }}"
+  roles:
+    - cisco.catalystwan.config_groups
+
+# After assigning templates, we should add check there to verify that device is managed by templates
+# add to vmanage_mode role.
+
+# Health checks
+- name: Verify control connections and BFD, OMP
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - azure_sdwan_config.yml
+    - "{{ results_path_controllers }}"
+    - "{{ results_path_edges }}"
+  roles:
+    - cisco.catalystwan.health_checks

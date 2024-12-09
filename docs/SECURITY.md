@@ -2,7 +2,7 @@
 
 ---
 
-This document outlines security procedures and general policies for the [ansible-collection-sdwan](https://github.com/cisco-open/ansible-collection-sdwan) project.
+This document outlines security procedures and general policies for the [ansible-collection-sdwan](https://github.com/cisco-en-programmability/ansible-collection-sdwan) project.
 
 - [Reporting a Bug](#reporting-a-bug)
 - [Disclosure Policy](#disclosure-policy)
@@ -12,7 +12,7 @@ This document outlines security procedures and general policies for the [ansible
 
 ---
 
-The [ansible-collection-sdwan](https://github.com/cisco-open/ansible-collection-sdwan) team and community take all security bugs in [ansible-collection-sdwan](https://github.com/cisco-open/ansible-collection-sdwan) seriously. Thank you for improving the security of [ansible-collection-sdwan](https://github.com/cisco-open/ansible-collection-sdwan). We appreciate your efforts and responsible disclosure and will make every effort to acknowledge your contributions.
+The [ansible-collection-sdwan](https://github.com/cisco-en-programmability/ansible-collection-sdwan) team and community take all security bugs in [ansible-collection-sdwan](https://github.com/cisco-en-programmability/ansible-collection-sdwan) seriously. Thank you for improving the security of [ansible-collection-sdwan](https://github.com/cisco-en-programmability/ansible-collection-sdwan). We appreciate your efforts and responsible disclosure and will make every effort to acknowledge your contributions.
 
 Report security bugs by emailing [ssalemar@cisco.com][Shivram Salem Arunachalam], [acichon@cisco.com][Arkadiusz Cichon] or [sprzemys@cisco.com][Przemyslaw Susko].
 

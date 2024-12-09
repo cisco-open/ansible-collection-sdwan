@@ -6,10 +6,10 @@ authors:
   - Arkadiusz Cichon <acichon@cisco.com>
 description: Ansible collection to provide full workflows for deployment, upgrades and configuration
 
-repository: https://github.com/cisco-open/ansible-collection-sdwan
-documentation: https://github.com/cisco-open/ansible-collection-sdwan/blob/main/README.md
-homepage: https://github.com/cisco-open/ansible-collection-sdwan
-issues: https://github.com/cisco-open/ansible-collection-sdwan/issues
+repository: https://github.com/cisco-en-programmability/ansible-collection-sdwan
+documentation: https://github.com/cisco-en-programmability/ansible-collection-sdwan/blob/main/README.md
+homepage: https://github.com/cisco-en-programmability/ansible-collection-sdwan
+issues: https://github.com/cisco-en-programmability/ansible-collection-sdwan/issues
 
 license:
   - "GPL-3.0-only"

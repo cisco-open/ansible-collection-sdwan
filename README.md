@@ -14,8 +14,8 @@
 
 ```
 
-[ansible-collection-sdwan](https://github.com/cisco-open/ansible-collection-sdwan) combine [SDWAN Deployment](https://github.com/cisco-open/ansible-collection-sdwan-deployment) and
-[Ansible Wrapper using catalystwan library](https://github.com/cisco-open/ansible-collection-catalystwan) collections inside one tool.
+[ansible-collection-sdwan](https://github.com/cisco-en-programmability/ansible-collection-sdwan) combine [SDWAN Deployment](https://github.com/cisco-en-programmability/ansible-collection-sdwan-deployment) and
+[Ansible Wrapper using catalystwan library](https://github.com/cisco-en-programmability/ansible-collection-catalystwan) collections inside one tool.
 
 Let users to fully deploy, onboard and upgrade their SD-WAN topology.
 
@@ -37,11 +37,11 @@ Let users to fully deploy, onboard and upgrade their SD-WAN topology.
 
 ## Overview
 
-[ansible-collection-sdwan](https://github.com/cisco-open/ansible-collection-sdwan) integrates the roles and modules from both repositories to create an automation workflow for Cisco SD-WAN.
-By leveraging these Ansible resources, [ansible-collection-sdwan](https://github.com/cisco-open/ansible-collection-sdwan) empowers network administrators to:
+[ansible-collection-sdwan](https://github.com/cisco-en-programmability/ansible-collection-sdwan) integrates the roles and modules from both repositories to create an automation workflow for Cisco SD-WAN.
+By leveraging these Ansible resources, [ansible-collection-sdwan](https://github.com/cisco-en-programmability/ansible-collection-sdwan) empowers network administrators to:
 
-- Automate Deployment: Roll out and provision Cisco SD-WAN controllers and edge devices with minimal manual intervention using [SDWAN Deployment](https://github.com/cisco-open/ansible-collection-sdwan-deployment) roles.
-- Onboarding of Controllers and Edge Devices: Simplify the process of integrating controllers and edge devices into the Cisco SD-WAN fabric, using automated deployment with PnP (Plug-and-Play), using [ansible-collection-catalystwan](https://github.com/cisco-open/ansible-collection-catalystwan) modules and roles.
+- Automate Deployment: Roll out and provision Cisco SD-WAN controllers and edge devices with minimal manual intervention using [SDWAN Deployment](https://github.com/cisco-en-programmability/ansible-collection-sdwan-deployment) roles.
+- Onboarding of Controllers and Edge Devices: Simplify the process of integrating controllers and edge devices into the Cisco SD-WAN fabric, using automated deployment with PnP (Plug-and-Play), using [ansible-collection-catalystwan](https://github.com/cisco-en-programmability/ansible-collection-catalystwan) modules and roles.
 - Workflow for Upgrades: Structured workflow that automates the upgrade process for controllers and edge devices. See [example playbook for upgrades](./playbooks/software_upgrades_with_remote_server.yml)
 - Workflows for backup and restore:
   - Backup Device configuration (includes Device Templates, Policies, Feature Templates). See [backup device configuration](./playbooks/backup_restore/backup_device_configuration.yml)
@@ -49,7 +49,7 @@ By leveraging these Ansible resources, [ansible-collection-sdwan](https://github
   - Backup running config (cli templates). See [backup running config](./playbooks/backup_restore/backup_running_config.yml)
   - Restore running config (cli templates). See [restore running config](./playbooks/backup_restore/restore_running_config.yml)
 
-[ansible-collection-sdwan](https://github.com/cisco-open/ansible-collection-sdwan) illustrates the power of Ansible's modularity and the significant benefits of using roles, custom modules, and collections for automating network operations. It stands as an indispensable resource for organizations looking to implement Infrastructure as Code (IaC) within their network infrastructure and embrace a more agile and DevOps-oriented approach to network management.
+[ansible-collection-sdwan](https://github.com/cisco-en-programmability/ansible-collection-sdwan) illustrates the power of Ansible's modularity and the significant benefits of using roles, custom modules, and collections for automating network operations. It stands as an indispensable resource for organizations looking to implement Infrastructure as Code (IaC) within their network infrastructure and embrace a more agile and DevOps-oriented approach to network management.
 
 ## Requirements
 
@@ -104,7 +104,7 @@ Current version of the full workflow for bringup SD-WAN assumes that users are f
 You can install collection by first cloning this repository:
 
 ```bash
-git clone git@github.com:cisco-open/ansible-collection-sdwan.git
+git clone git@github.com:cisco-en-programmability/ansible-collection-sdwan.git
 ```
 
 Then setting your python environment.

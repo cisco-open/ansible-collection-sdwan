@@ -34,6 +34,7 @@ mock_modules:
 #   - fake_namespace.fake_collection.fake_module
 #   - fake_namespace.fake_collection.fake_module.fake_submodule
 mock_roles:
+  - cisco.sdwan_deployment.aws_device_params
   - cisco.sdwan_deployment.aws_network_infrastructure
   - cisco.sdwan_deployment.aws_teardown
   - cisco.sdwan_deployment.aws_controllers
@@ -42,6 +43,7 @@ mock_roles:
   - cisco.sdwan_deployment.azure_teardown
   - cisco.sdwan_deployment.azure_controllers
   - cisco.sdwan_deployment.azure_edges
+  - cisco.catalystwan.edge_params
   - cisco.catalystwan.software_upgrades_remote
   - cisco.catalystwan.api_ready
   - cisco.catalystwan.administration_settings

@@ -5,18 +5,19 @@
   hosts: localhost
   gather_facts: false
   vars:
-    aws_tag_creator: "{{ organization_name }}"
+    az_tag_creator: "{{ organization_name }}"
+    az_resource_group: "{{ az_resources_prefix }}-rg"
   vars_files:
-    - aws_sdwan_config.yml
+    - azure_sdwan_config.yml
   roles:
-    - cisco.sdwan_deployment.aws_device_params
+    - cisco.sdwan_deployment.azure_device_params
     - cisco.catalystwan.edge_params
 
 - name: Extract deployment facts
   hosts: localhost
   gather_facts: false
   vars_files:
-    - aws_sdwan_config.yml
+    - azure_sdwan_config.yml
   tasks:
     - name: Generate deployment facts file for cEdges
       ansible.builtin.include_role:
@@ -27,7 +28,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - ./feature_profile_config.yml
+    - feature_profile_config.yml
   roles:
     - cisco.catalystwan.feature_profile_builder
 
@@ -35,7 +36,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - aws_sdwan_config.yml
+    - azure_sdwan_config.yml
     - "{{ playbook_dir }}/results/generated_feature_profiles.yml"
     - "{{ results_path_edges }}"
   roles:

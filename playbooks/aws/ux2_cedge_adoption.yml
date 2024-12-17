@@ -1,0 +1,42 @@
+# Copyright 2024 Cisco Systems, Inc. and its affiliates
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+- name: Read deployed cEdge parameters
+  hosts: localhost
+  gather_facts: false
+  vars:
+    aws_tag_creator: "{{ organization_name }}"
+  vars_files:
+    - aws_sdwan_config.yml
+  roles:
+    - cisco.sdwan_deployment.aws_device_params
+    - cisco.catalystwan.edge_params
+
+- name: Extract deployment facts
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - aws_sdwan_config.yml
+  tasks:
+    - name: Generate deployment facts file for cEdges
+      ansible.builtin.include_role:
+        name: cisco.sdwan_deployment.common
+        tasks_from: generate_deployment_facts_edges.yml
+
+- name: Build feature profile data
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - ./feature_profile_config.yml
+  roles:
+    - cisco.catalystwan.feature_profile_builder
+
+- name: Create Config Groups
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - aws_sdwan_config.yml
+    - "{{ playbook_dir }}/results/generated_feature_profiles.yml"
+    - "{{ results_path_edges }}"
+  roles:
+    - cisco.catalystwan.config_groups
